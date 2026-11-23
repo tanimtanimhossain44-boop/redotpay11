@@ -1,6 +1,35 @@
- "use client";
+"use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
+
+// Renders the full email HTML and grows to fit it, so nothing is cut off.
+function EmailFrame({ html }) {
+  const ref = useRef(null);
+  const [height, setHeight] = useState(600);
+
+  function fit() {
+    try {
+      const doc = ref.current && ref.current.contentDocument;
+      if (!doc) return;
+      const h = Math.max(doc.documentElement.scrollHeight, doc.body ? doc.body.scrollHeight : 0);
+      if (h) setHeight(h + 16);
+    } catch {}
+  }
+
+  return (
+    <iframe
+      ref={ref}
+      title="Email message"
+      className="emailFrame"
+      sandbox="allow-same-origin"
+      referrerPolicy="no-referrer"
+      srcDoc={html}
+      onLoad={fit}
+      style={{ height }}
+      scrolling="no"
+    />
+  );
+}
 
 export default function Home() {
   const [password, setPassword] = useState("");
@@ -133,13 +162,7 @@ export default function Home() {
               Its message body is hidden for account security.
             </div>
           ) : selected.html ? (
-            <iframe
-              title="Email message"
-              className="emailFrame"
-              sandbox=""
-              referrerPolicy="no-referrer"
-              srcDoc={selected.html}
-            />
+            <EmailFrame html={selected.html} />
           ) : (
             <pre className="plainMail">{selected.text || selected.snippet || "No message body available."}</pre>
           )}
