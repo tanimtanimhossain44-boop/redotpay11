@@ -84,7 +84,7 @@ input:focus { border-color: #528bff; box-shadow: 0 0 0 3px #3978f622; }
 .backButton { margin-bottom: 20px; }
 .messageSubject { overflow-wrap: anywhere; }
 .messageMeta { display: grid; gap: 8px; color: var(--muted); font-size: 13px; margin: 18px 0 24px; }
-.emailFrame { display: block; width: 100%; min-height: 580px; border: 0; border-radius: 10px; background: white; }
+.emailFrame { display: block; width: 100%; min-height: 300px; border: 0; border-radius: 10px; background: white; }
 .plainMail { white-space: pre-wrap; overflow-wrap: anywhere; color: #e2e8f0; font: 14px/1.65 ui-monospace, monospace; }
 .notice { padding: 16px; border: 1px solid #69562a; border-radius: 10px; color: #f4d58a; background: #382d16; line-height: 1.5; }
 footer { padding: 25px 0 5px; color: #66758d; font-size: 11px; text-align: center; }
